@@ -1,12 +1,11 @@
 import fetch from 'isomorphic-fetch';
-import config from '../config';
 
 export default function callApi({
   endpoint, token, options, payload,
 }) {
   const authHeaders = token ? { Authorization: `Bearer ${token}` } : {};
 
-  return fetch(`${config.API_URI}${endpoint}`, {
+  return fetch(`https://lab.lectrum.io/redux/api${endpoint}`, {
     method: 'GET',
     headers: {
       Accept: 'application/json',

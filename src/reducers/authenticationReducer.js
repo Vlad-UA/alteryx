@@ -4,16 +4,6 @@ import * as localStorageConst from '../constants/localStorageConstants';
 
 const token = localStorage.getItem(localStorageConst.LOCAL_STORAGE_TOKEN);
 
-/**
- *@type {object}
- *@property {boolean} isAuthenticated
- *@property {string} token
- *@property {object} user
- *@property {string} user._id
- *@property {string} user.username
- *@property {string} user.lastName
- *@property {string} user.firstName
- */
 const initialState = {
   isAuthenticated: !!token,
   token,
@@ -55,6 +45,3 @@ export default function authentication(stateAuthentication = initialState, actio
       return stateAuthentication;
   }
 }
-
-// eslint-disable-next-line
-export const getActiveUserId = activeUser => activeUser._id;

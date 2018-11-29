@@ -44,22 +44,19 @@ export function signup(username, password) {
   };
 }
 
-export function login(username, password) {
+export function login(email, password) {
   return (dispatch, getState) => {
-    const { isFetching } = getState().services;
 
-    if (isFetching.login) {
-      return Promise.resolve();
-    }
+      // console.log("action login", email, password);
 
     dispatch({
       type: authConst.LOGIN_REQUEST,
     });
 
     return callApi({
-      endpoint: '/login',
+      endpoint: '/user/login',
       payload: {
-        username,
+          email,
         password,
       },
       options: {
@@ -86,46 +83,9 @@ export function login(username, password) {
   };
 }
 
-export function logout() {
-  return (dispatch, getState) => {
-    const { isFetching } = getState().services;
-
-    if (isFetching.logout) {
-      return Promise.resolve();
-    }
-
-    dispatch({
-      type: authConst.LOGOUT_REQUEST,
-    });
-
-    return callApi({
-      endpoint: '/logout',
-    })
-      .then((json) => {
-        localStorage.removeItem(localStorageConst.LOCAL_STORAGE_TOKEN);
-
-        dispatch({
-          type: authConst.LOGOUT_SUCCESS,
-          payload: json,
-        });
-      })
-      .catch(reason =>
-        dispatch({
-          type: authConst.LOGOUT_FAILURE,
-          payload: reason,
-        }));
-  };
-}
-
 export function receiveAuth() {
   return (dispatch, getState) => {
     const { token } = getState().authentication;
-
-    const { isFetching } = getState().services;
-
-    if (isFetching.receiveAuth) {
-      return Promise.resolve();
-    }
 
     if (!token) {
       dispatch({
@@ -134,7 +94,7 @@ export function receiveAuth() {
     }
 
     return callApi({
-      endpoint: '/users/me',
+      endpoint: '/user/id',
       token,
     })
       .then(json =>

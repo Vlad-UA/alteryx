@@ -1,23 +1,26 @@
-im
+import React from 'react';
+import WelcomeHeader from './WelcomeHeader';
 
-class WelcomeHeader extends React.Component{
-
-    handleLogin = ()=>{
-        this.props.history.push("login");
-    };
-
-    handleSignUp = ()=>{
-        this.props.history.push("sign-up");
-    };
+class ContactsView extends React.Component{
 
     render(){
         return(
-            <section style={{backgroundColor: "#4267B2", height: "42px"}}>
-                <button onClick={this.handleLogin}>Log In</button>
-                <button onClick={this.handleSignUp}>Sign Up</button>
-            </section>
+            <React.Fragment>
+                <WelcomeHeader />
+                <form>
+                    <label>
+                        Email:
+                        <input type="text" name="email" />
+                    </label>
+                    <label>
+                        Password:
+                        <input type="password" name="password" />
+                    </label>
+                    <input type="submit" value="Log In" />
+                </form>
+            </React.Fragment>
         )
     }
 }
 
-export default WelcomeHeader;
+export default ContactsView;

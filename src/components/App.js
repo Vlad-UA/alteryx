@@ -1,29 +1,21 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
+import '../App.css';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-            <button>test</button>
-        </header>
-      </div>
-    );
-  }
-}
+import Login from '../containers/Login';
+import Registration from '../containers/Registration';
+import Contacts from '../containers/Contacts';
+import PrivateRouteContainer from '../containers/PrivateRouteContainer';
+
+const App = () => (
+    <Router>
+        <Switch>
+            <Route path="/login" component={Login} />
+            <Route path="/sign-up" component={Registration} />
+            <PrivateRouteContainer path="/contacts" component={Contacts} />
+            <Redirect to="/login" />
+        </Switch>
+    </Router>
+);
 
 export default App;
